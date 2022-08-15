@@ -32,5 +32,10 @@
         "chat": "https://github.com/webinertia/aurora/discussions",
         "source": "https://github.com/webinertia/aurora",
         "docs": "https://github.com/webinertia/aurora/wiki"
+    },
+    "config": {
+        "allow-plugins": {
+            "laminas/laminas-component-installer": true
+        }
     }
 }
