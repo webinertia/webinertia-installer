@@ -18,7 +18,7 @@
     },
     "extra": {
         "laminas": {
-            "component": "Webinertia\\webinertia-installer",
+            "component": "Webinertia\\Installer",
             "config-provider": "Webinertia\\Installer\\ConfigProvider"
         }
     },
