@@ -1,0 +1,36 @@
+{
+    "name": "webinertia/webinertia-installer",
+    "description": "Aurora CMS Installer",
+    "keywords": [
+        "webinertia",
+        "aurora",
+        "installer"
+    ],
+    "homepage": "https://github.com/webinertia",
+    "license": "BSD-3-Clause",
+    "require": {
+        "php": "^7.3 || ~8.0.0",
+        "laminas/laminas-component-installer" : "^2.6",
+        "laminas/laminas-servicemanager": "^3.11.1"
+    },
+    "suggest": {
+        "laminas/laminas-component-installer" : "^2.6, required for configuration injection"
+    },
+    "extra": {
+        "laminas": {
+            "component": "Webinertia\\webinertia-installer",
+            "config-provider": "Webinertia\\Installer\\ConfigProvider"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Webinertia\\Installer\\": "src/"
+        }
+    },
+    "support": {
+        "issues": "https://github.com/webinertia/aurora/issues",
+        "chat": "https://github.com/webinertia/aurora/discussions",
+        "source": "https://github.com/webinertia/aurora",
+        "docs": "https://github.com/webinertia/aurora/wiki"
+    }
+}
