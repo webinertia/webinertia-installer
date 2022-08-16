@@ -86,15 +86,6 @@ final class DbConfigCommand extends AbstractCommand
             );
             $output->writeln('<info>Configuration data successfully written.</info>');
         }
-        $output->writeln(
-            '<info>Importing schema into database: '
-            . $input->getParam('dbname')
-            . ' on host: '
-            . $input->getParam('host')
-            . ' using username: '
-            . $input->getParam('username')
-            . '</info>'
-        );
-                return 0;
+        return 0;
     }
 }

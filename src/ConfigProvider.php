@@ -23,13 +23,7 @@ class ConfigProvider
             ],
             'chains'   => [
                 Command\DbConfigCommand::class => [
-                    Command\BuildDbCommand::class => [
-                        '--dbname'   => '--dbname',
-                        '--host'     => '--host',
-                        '--username' => '--username',
-                        '--password' => '--password',
-                        '--mode'     => '--mode',
-                    ],
+                    Command\BuildDbCommand::class => [],
                 ],
             ],
         ];

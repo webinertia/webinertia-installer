@@ -4,35 +4,52 @@ declare(strict_types=1);
 
 namespace Webinertia\Installer\Command;
 
+use DirectoryIterator;
 use Laminas\Cli\Input\ParamAwareInputInterface;
 use Laminas\Db\Adapter\Adapter;
-use Laminas\Db\Adapter\AdapterAwareInterface;
-use Laminas\Db\Adapter\AdapterAwareTrait;
+use Laminas\Db\Adapter\AdapterInterface;
+use SplFileObject;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Webinertia\Installer\Command\AbstractCommand;
 
-class BuildDbCommand extends AbstractCommand implements AdapterAwareInterface
+use function sprintf;
+
+class BuildDbCommand extends AbstractCommand
 {
-    use AdapterAwareTrait;
-
     protected const MYSQL_DIR = __DIR__ . '/../../../../../data/db';
+    /** @var Adapter $dbAdapter */
+    protected $dbAdapter;
 
-    public function __construct(array $config)
+    public function __construct(AdapterInterface $adapter, array $config)
     {
         parent::__construct();
-        $this->config = $config;
+        $this->config    = $config;
+        $this->dbAdapter = $adapter;
     }
 
     public function configure(): void
     {
-        $this->setName('build-db');
-        $this->setDescription('Build Database');
     }
 
     /** @var ParamAwareInputInterface $input */
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
+        $dirIterator = new DirectoryIterator(self::MYSQL_DIR);
+        foreach ($dirIterator as $file) {
+            if ($file->isDot()) {
+                continue;
+            }
+            $output->writeln('<info>' . sprintf('Using path %s', $file->getPathname()) . '</info>');
+            $output->writeln('<info>' . sprintf('Processing %s', $file->getFilename()) . '</info>');
 
+            $fileHandler = new SplFileObject($file->getPathname(), 'r');
+            $fileHandler->setFlags(SplFileObject::DROP_NEW_LINE | SplFileObject::SKIP_EMPTY | SplFileObject::READ_AHEAD);
+            $query = $fileHandler->fread($fileHandler->getSize());
+
+            $this->dbAdapter->query($query, Adapter::QUERY_MODE_EXECUTE);
+        }
+        $output->writeln('<comment>Database build complete</comment>');
+        return 0;
     }
 }
