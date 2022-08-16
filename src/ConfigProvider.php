@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Webinertia\Installer;
 
-use Laminas\ServiceManager\Factory\InvokableFactory;
-
 class ConfigProvider
 {
     public function __invoke(): array
@@ -20,7 +18,19 @@ class ConfigProvider
     {
         return [
             'commands' => [
-                'import-schema' => Command\ImportSchemaCommand::class,
+                'db-config' => Command\DbConfigCommand::class,
+                'build-db'  => Command\BuildDbCommand::class,
+            ],
+            'chains'   => [
+                Command\DbConfigCommand::class => [
+                    Command\BuildDbCommand::class => [
+                        '--dbname'   => '--dbname',
+                        '--host'     => '--host',
+                        '--username' => '--username',
+                        '--password' => '--password',
+                        '--mode'     => '--mode',
+                    ],
+                ],
             ],
         ];
     }
@@ -32,7 +42,7 @@ class ConfigProvider
     {
         return [
             'factories' => [
-                Debug::class => InvokableFactory::class,
+                Command\BuildDbCommand::class => Command\Factory\BuildDbCommandFactory::class,
             ],
         ];
     }
