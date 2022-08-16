@@ -34,7 +34,6 @@
         "docs": "https://github.com/webinertia/aurora/wiki"
     },
     "config": {
-        "vendor-dir": "webinertia",
         "allow-plugins": {
             "laminas/laminas-component-installer": true
         }
