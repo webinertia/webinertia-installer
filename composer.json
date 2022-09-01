@@ -9,12 +9,11 @@
     "homepage": "https://github.com/webinertia",
     "license": "BSD-3-Clause",
     "require": {
-        "php": "^7.3 || ^8.1",
-        "laminas/laminas-component-installer" : "^2.6",
-        "laminas/laminas-servicemanager": "^3.11.1"
+        "php": "^8.0 || ^8.1",
+        "laminas/laminas-component-installer" : "^3.0.1"
     },
     "suggest": {
-        "laminas/laminas-component-installer" : "^2.6, required for configuration injection"
+        "laminas/laminas-component-installer" : "^3.0.1, required for configuration injection"
     },
     "extra": {
         "laminas": {
