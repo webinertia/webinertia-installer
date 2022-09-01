@@ -9,7 +9,7 @@
     "homepage": "https://github.com/webinertia",
     "license": "BSD-3-Clause",
     "require": {
-        "php": "^7.3 || ~8.0.0",
+        "php": "^7.3 || ^8.1",
         "laminas/laminas-component-installer" : "^2.6",
         "laminas/laminas-servicemanager": "^3.11.1"
     },
