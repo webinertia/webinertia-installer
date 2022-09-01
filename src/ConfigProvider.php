@@ -30,7 +30,7 @@ class ConfigProvider
     }
 
     /**
-     * Return application-level dependency configuration
+     * Return application-level dependency configuration,
      */
     public function getDependencyConfig(): array
     {
